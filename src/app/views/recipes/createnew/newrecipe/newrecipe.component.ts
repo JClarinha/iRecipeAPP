@@ -174,7 +174,7 @@ export class NewRecipeComponent implements OnInit {
                         console.log('Ingrediente associado com sucesso:', res);
                     },
                     error: (err) => {
-                        console.error('Erro ao associar ingrediente:', err);
+                          console.error('Erro ao associar ingrediente:', err);
                     }
                 });
             });
