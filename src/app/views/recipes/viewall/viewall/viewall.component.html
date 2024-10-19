@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="recipe-list">
+      <div class="card" *ngFor="let recipe of paginatedRecipes" (click)="goToRecipeDetails(recipe)" style="cursor: pointer;">
+          <img class="card-img-top" [src]="recipe.image" alt="{{ recipe.name }}">
+          <div class="card-body">
+              <h5 class="card-title">{{ recipe.name }}</h5>
+              <p class="card-category">{{ recipe.category }}</p>
+              <p class="card-description">{{ recipe.description }}</p>
+              <ul class="card-details">
+                  <li>Difficulty: {{ recipe.difficulty }}</li>
+                  <li>Duration: {{ recipe.duration }} minutes</li>
+                  <li>Servings: {{ recipe.servings }}</li>
+                  <li>Date: {{ recipe.date | date }}</li>
+                  <li>
+                    Status: <span [ngClass]="{
+                        'status-approved': recipe.status === 'Approved',
+                        'status-pending': recipe.status === 'Pending',
+                        'status-rejected': recipe.status === 'Rejected'
+                      }">{{ recipe.status }}</span>
+                  </li>
+
+              </ul>
+          </div>
+      </div>
+  </div>
+  <div class="pagination">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+
+    <span *ngFor="let page of getPages(); let i = index">
+      <button
+        [ngClass]="{'active-page': currentPage === page}"
+        (click)="goToPage(page)">
+        {{ page }}
+      </button>
+    </span>
+
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+
+
+
+
+</div>

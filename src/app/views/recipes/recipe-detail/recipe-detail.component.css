@@ -1,0 +1,19 @@
+.card {
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  max-width: 900px; /* Aumenta a largura do card */
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.card-header {
+  color: #333;
+  font-weight: 300;
+  font-size: 1.75rem;
+  border-bottom: 2px solid #ddd;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+}

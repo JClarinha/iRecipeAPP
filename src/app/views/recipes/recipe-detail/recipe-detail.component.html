@@ -1,0 +1,96 @@
+<div class="">
+  <div class="card-header text-center">
+    <strong>Recipe Details</strong>
+  </div>
+  <div class="card-body">
+
+    <br>
+
+    <!-- Image Section -->
+    <div class="form-group mb-3 text-center">
+      <img [src]="recipe.image" alt="{{ recipe.name }}" class="img-fluid"
+        style="max-width: 800px; border-radius: 10px;">
+    </div>
+
+    <!-- Name Section -->
+    <div class="form-group mb-3">
+      <label style="font-weight: bold;">Name:</label>
+      <p class="form-control-plaintext">{{ recipe.name }}</p>
+    </div>
+
+    <!-- Category Section -->
+    <div class="form-group mb-3">
+      <label style="font-weight: bold;">Category:</label>
+      <p class="form-control-plaintext">{{ recipe.category }}</p>
+    </div>
+
+    <!-- Description Section -->
+    <div class="form-group mb-3">
+      <label style="font-weight: bold;">Description:</label>
+      <p class="form-control-plaintext">{{ recipe.description }}</p>
+    </div>
+
+    <!-- Ingredients Section -->
+    <div class="form-group mb-3">
+      <label style="font-weight: bold;">Ingredients:</label>
+      <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">
+          {{ ingredient.name }} - {{ ingredient.quantity }} {{ ingredient.unit }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Preparation Method Section -->
+    <div class="form-group mb-3">
+      <label style="font-weight: bold;">Preparation Method:</label>
+      <ol>
+        <li *ngFor="let step of recipe.preparation.split('&&')">{{ step }}</li>
+      </ol>
+    </div>
+
+
+    <!-- Difficulty Section -->
+    <div class="form-group mb-3">
+      <label style="font-weight: bold;">Difficulty Level:</label>
+      <p class="form-control-plaintext">{{ recipe.difficulty }}</p>
+    </div>
+
+    <!-- Duration Section -->
+    <div class="form-group mb-3">
+      <label style="font-weight: bold;">Duration (minutes):</label>
+      <p class="form-control-plaintext">{{ recipe.duration }} minutes</p>
+    </div>
+
+    <!-- Servings Section -->
+    <div class="form-group mb-3">
+      <label style="font-weight: bold;">Number of People:</label>
+      <p class="form-control-plaintext">{{ recipe.servings }}</p>
+    </div>
+
+    <!-- User Section -->
+    <div class="form-group mb-3">
+      <label style="font-weight: bold;">Created by:</label>
+      <p class="form-control-plaintext">{{ recipe.user }}</p>
+    </div>
+
+    <!-- Status Section -->
+    <div class="form-group mb-3">
+      <label style="font-weight: bold;">Status:</label>
+      <p class="form-control-plaintext" [ngClass]="{
+        'text-success': recipe.status === 'Approved',
+        'text-warning': recipe.status === 'Pending',
+        'text-danger': recipe.status === 'Rejected'
+      }">
+        <strong>{{ recipe.status }}</strong>
+      </p>
+    </div>
+
+    <div class="text-center mt-4">
+      <button (click)="goBack()" class="btn btn-lg btn-secondary">Voltar</button>
+    </div>
+
+    <br>
+
+
+  </div>
+</div>

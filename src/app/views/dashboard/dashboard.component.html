@@ -1,0 +1,40 @@
+<div class="newsfeed-container">
+  <div class="recipe-card" *ngFor="let recipe of recipes">
+    <!-- Imagem da Receita -->
+    <div class="recipe-image">
+      <img [src]="recipe.image" alt="{{ recipe.name }}" class="img-fluid">
+    </div>
+
+    <br>
+
+    <!-- Informações da Receita -->
+    <div class="recipe-info">
+      <h3>{{ recipe.name }}</h3>
+      <p class="recipe-description">{{ recipe.description | slice:0:100 }}...</p>
+      <p><strong>Category:</strong> {{ recipe.category }}</p>
+      <p><strong>Created by:</strong> {{ recipe.user }}</p>
+
+      <!-- Botão de Favoritar -->
+      <button class="favorite-button" (click)="toggleFavorite(recipe)">
+        <fa-icon [icon]="recipe.isFavorite ? faStarSolid : faStarOutline"></fa-icon>
+        <span>{{ recipe.isFavorite ? 'Unfavorite' : 'Favorite' }}</span>
+      </button>
+    </div>
+
+    <!-- Seção de Comentários -->
+    <div class="recipe-comments">
+      <h4>Comments</h4>
+      <ul class="comments-list">
+        <li *ngFor="let comment of recipe.comments">
+          <strong>{{ comment.user }}:</strong> {{ comment.text }}
+        </li>
+      </ul>
+
+      <!-- Adicionar Novo Comentário -->
+      <div class="add-comment">
+        <input type="text" [(ngModel)]="newComment" placeholder="Add a comment...">
+        <button (click)="addComment(recipe)">Post</button>
+      </div>
+    </div>
+  </div>
+</div>

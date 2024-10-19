@@ -1,0 +1,101 @@
+<div class="">
+  <div class="card-header text-center">
+    <strong>Create New Recipe</strong>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="recipeForm" (ngSubmit)="SaveRecipe()">
+      <div class="form-group mb-3">
+        <label for="image">Image <span class="text-danger">*</span></label>
+        <input type="file" id="image" name="image" class="form-control" (change)="onFileSelected($event)">
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="name">Name <span class="text-danger">*</span></label>
+        <input type="text" id="name" formControlName="name" class="form-control" placeholder="Enter the recipe name">
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="category">Category <span class="text-danger">*</span></label>
+        <div class="dropdown-wrapper me-2" style="position: relative; flex: 1;">
+          <select id="category" formControlName="categoryId" class="form-control" required >
+            @for (categoryItem of categories; let i = $index; track categoryItem) {
+              <option [value]="categoryItem.id">{{categoryItem.name}}</option>
+            }
+          </select>
+          <span class="dropdown-icon">&#x25BC;</span>
+        </div>
+      </div>
+      
+
+      <div class="form-group mb-3">
+        <label for="description">Description <span class="text-danger">*</span></label>
+        <textarea id="description" formControlName="description" class="form-control" maxlength="250" placeholder="Enter a description"></textarea>
+      </div>
+
+      <!-- Ingredientes Section -->
+      <div class="form-group mb-3" formArrayName="ingredients">
+        <label for="name">Ingredients (min. 2) <span class="text-danger">*</span></label>
+        <br> <br>
+        <button type="button" (click)="addIngredient()" class="btn btn-primary">Add Ingredient</button>
+        <br><br>
+        @for (ingredient of ingredients.controls; let i = $index; track ingredient) {
+        <div [formGroupName]="i" class="d-flex align-items-center mb-2 w-100">
+          <input type="text" formControlName="ingredientname" placeholder="Ingredient Name"
+            class="form-control form-control-md me-2" required style="flex: 1;" />
+          <input type="number" formControlName="quantity" placeholder="Quantity" class="form-control form-control-md me-2"
+            required style="flex: 1;" />
+
+          <div class="dropdown-wrapper me-2" style="position: relative; flex: 1;">
+            <select id="unit" formControlName="unitId" class="form-control">
+              <option value="" disabled selected>Select a unit...</option>
+              @for (unitItem of units; let i = $index; track unitItem) {
+                <option [value]="unitItem.id">{{unitItem.name}}</option>
+              }
+            </select>
+            <span class="dropdown-icon">&#x25BC;</span>
+          </div>
+          
+          <fa-icon [icon]="faTrashCan" (click)="removeIngredient(i)" style="cursor: pointer;color: red;" ></fa-icon>
+        </div>
+        }
+      </div>
+
+      <!-- Preparation Method  -->
+
+      <div class="form-group mb-3">
+        <label for="preparation">Preparation<span class="text-danger">*</span></label>
+        <textarea id="preparation" formControlName="preparation" class="form-control" placeholder="Enter preparation steps"></textarea>
+      </div>
+
+
+      <div class="form-group mb-3">
+        <label for="difficulty">Difficulty <span class="text-danger">*</span></label>
+        <div class="dropdown-wrapper me-2" style="position: relative; flex: 1;">
+          <select id="difficulty" formControlName="difficultyId" class="form-control">
+            @for (difficultyItem of difficulties; let i = $index; track difficultyItem) {
+              <option [value]="difficultyItem.id">{{difficultyItem.difficultyLevel}}</option>
+            }
+          </select>
+          <span class="dropdown-icon">&#x25BC;</span>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="duration">Duration <span class="text-danger">*</span></label>
+        <input type="number" id="duration" formControlName="duration" class="form-control" placeholder="Enter duration in minutes">
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="pax">Number of People <span class="text-danger">*</span></label>
+        <input type="number" id="pax" formControlName="pax" class="form-control" placeholder="Enter number of pax">
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="user">User</label>
+        <input type="text" id="user" formControlName="user" class="form-control" [value]="currentUser" readonly>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="recipeForm.invalid">Create Recipe</button>
+    </form>
+  </div>
+</div>
