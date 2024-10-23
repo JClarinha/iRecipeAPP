@@ -8,7 +8,7 @@
 
     <!-- Image Section -->
     <div class="form-group mb-3 text-center">
-      <img [src]="recipe.image" alt="{{ recipe.name }}" class="img-fluid"
+      <img [src]="recipe.imagePath ? recipe.imagePath : '/assets/images/Image_not_available.png'"  alt="{{ recipe.name }}" class="img-fluid"
         style="max-width: 800px; border-radius: 10px;">
     </div>
 
@@ -21,7 +21,7 @@
     <!-- Category Section -->
     <div class="form-group mb-3">
       <label style="font-weight: bold;">Category:</label>
-      <p class="form-control-plaintext">{{ recipe.category }}</p>
+      <p class="form-control-plaintext">{{ recipe.category?.name }}</p>
     </div>
 
     <!-- Description Section -->
@@ -31,20 +31,22 @@
     </div>
 
     <!-- Ingredients Section -->
-    <div class="form-group mb-3">
+     <div class="form-group mb-3">
       <label style="font-weight: bold;">Ingredients:</label>
-      <ul>
-        <li *ngFor="let ingredient of recipe.ingredients">
-          {{ ingredient.name }} - {{ ingredient.quantity }} {{ ingredient.unit }}
-        </li>
-      </ul>
-    </div>
+    <ul>
+      <li *ngFor="let ingredient of ingredients">
+        {{ ingredient.ingredient?.name }}: {{ ingredient.quantity }} {{ ingredient.unit?.name }}
+      </li>
+    </ul>
+  </div>
 
     <!-- Preparation Method Section -->
     <div class="form-group mb-3">
-      <label style="font-weight: bold;">Preparation Method:</label>
+      <label style="font-weight: bold;">Preparation:</label>
       <ol>
-        <li *ngFor="let step of recipe.preparation.split('&&')">{{ step }}</li>
+        <li *ngFor="let step of formatPreparationMethod(recipe.preparation)">
+          {{ step }}
+        </li>
       </ol>
     </div>
 
@@ -52,7 +54,7 @@
     <!-- Difficulty Section -->
     <div class="form-group mb-3">
       <label style="font-weight: bold;">Difficulty Level:</label>
-      <p class="form-control-plaintext">{{ recipe.difficulty }}</p>
+      <p class="form-control-plaintext">{{ recipe.difficulty?.difficultyLevel }}</p>
     </div>
 
     <!-- Duration Section -->
@@ -64,30 +66,44 @@
     <!-- Servings Section -->
     <div class="form-group mb-3">
       <label style="font-weight: bold;">Number of People:</label>
-      <p class="form-control-plaintext">{{ recipe.servings }}</p>
+      <p class="form-control-plaintext">{{ recipe.pax }}</p>
     </div>
 
     <!-- User Section -->
     <div class="form-group mb-3">
       <label style="font-weight: bold;">Created by:</label>
-      <p class="form-control-plaintext">{{ recipe.user }}</p>
+      <p class="form-control-plaintext">{{ recipe.user?.name }}</p>
     </div>
 
     <!-- Status Section -->
     <div class="form-group mb-3">
       <label style="font-weight: bold;">Status:</label>
-      <p class="form-control-plaintext" [ngClass]="{
-        'text-success': recipe.status === 'Approved',
-        'text-warning': recipe.status === 'Pending',
-        'text-danger': recipe.status === 'Rejected'
-      }">
-        <strong>{{ recipe.status }}</strong>
-      </p>
+     <p><span [ngClass]="{
+      'approved': recipe.approval === true,
+      'rejected': recipe.approval === false,
+      'pending': recipe.approval === null
+    }">
+      {{
+        recipe.approval === true ? 'Approved' :
+        recipe.approval === false ? 'Rejected' :
+        'Pending'
+      }}
+    </span></p>
+        
+      
     </div>
 
-    <div class="text-center mt-4">
-      <button (click)="goBack()" class="btn btn-lg btn-secondary">Voltar</button>
+
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+      <button (click)="goBack()" class="btn btn-lg btn-secondary" style="margin: auto;">Back</button>
+      <button (click)="deleteRecipe()" class="btn btn-lg btn-danger">Remove</button>
     </div>
+    
+    
+    
+
+    
 
     <br>
 

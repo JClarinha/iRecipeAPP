@@ -1,0 +1,19 @@
+.loading-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Garante que o carregador apareça acima de outros conteúdos */
+  }
+
+  .icon-eye {
+    width: 24px;
+    height: 24px;
+    margin-left: 8px; /* Espaçamento entre o input e o ícone */
+  }
+  
+  .hidden {
+    display: none; /* Esconde o ícone se não for visível */
+  }
+  
+  

@@ -4,37 +4,84 @@
       <c-col lg="7" md="9" xl="6">
         <c-card class="mx-4">
           <c-card-body class="p-4">
-            <form cForm>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"> <!-- Bind do formGroup e submit -->
               <h1>Register</h1>
               <p class="text-body-secondary">Create your account</p>
+
+              <!-- Indicador de Carregamento -->
+              <div *ngIf="loading" class="loading-spinner">
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+
+              <!-- Campo Nome -->
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
                 </span>
-                <input autoComplete="name" cFormControl placeholder="Username" />
+                <input
+                  formControlName="name"
+                  autoComplete="name"
+                  cFormControl
+                  placeholder="Name"
+                  [ngClass]="{'is-invalid': isFieldInvalid('name')}"
+                />
               </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>&#64;</span>
-                <input autoComplete="email" cFormControl placeholder="Email" />
-              </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input autoComplete="new-password" cFormControl placeholder="Password" type="password" />
-              </c-input-group>
-              <c-input-group class="mb-4">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input autoComplete="new-password" cFormControl placeholder="Repeat password" type="password" />
-              </c-input-group>
-              <div class="d-grid gap-2 d-flex justify-content-center">
-                <button cButton color="success" type="submit" class="w-50">Create Account</button>
-                <button cButton color="primary" class="w-50" (click)="backToLogin()">Back to Login</button>
+              <div *ngIf="isFieldInvalid('name')" class="invalid-feedback d-block">
+                <small *ngIf="registerForm.get('name')?.errors?.['required']">Name is required.</small>
+                <small *ngIf="registerForm.get('name')?.errors?.['minlength']">Name must be at least 2 characters long.</small>
               </div>
 
+              <!-- Campo Email -->
+              <c-input-group class="mb-3">
+                <span cInputGroupText>&#64;</span>
+                <input
+                  formControlName="email"
+                  autoComplete="email"
+                  cFormControl
+                  placeholder="Email"
+                  [ngClass]="{'is-invalid': isFieldInvalid('email')}"
+                />
+              </c-input-group>
+              <div *ngIf="isFieldInvalid('email')" class="invalid-feedback d-block">
+                <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</small>
+                <small *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email address.</small>
+              </div>
 
+              <!-- Campo Password -->
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilLockLocked"></svg>
+                </span>
+                <input
+                  formControlName="password"
+                  autoComplete="new-password"
+                  cFormControl
+                  placeholder="Password"
+                  [type]="showPassword ? 'text' : 'password'" 
+                  [ngClass]="{'is-invalid': isFieldInvalid('password')}"
+                />
+                <span (click)="togglePasswordVisibility()" style="cursor: pointer">
+                  <svg cIcon name="cilEye" [ngClass]="{'hidden': showPassword}" class="icon-eye"></svg>
+                  <svg cIcon name="cilEyeOff" [ngClass]="{'hidden': !showPassword}" class="icon-eye"></svg>
+                </span>
+              </c-input-group>
+              <div *ngIf="isFieldInvalid('password')" class="invalid-feedback d-block">
+                <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
+                <small *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</small>
+                <small *ngIf="registerForm.get('password')?.errors?.['passwordStrength']">
+                  Password must contain at least one uppercase letter and one special character.
+                </small>
+              </div>
+
+              <!-- Botões -->
+              <div class="d-grid gap-2 d-flex justify-content-center">
+                <button cButton color="success" type="submit" class="w-50" [disabled]="registerForm.invalid || loading">
+                  Create Account
+                </button>
+                <button cButton color="primary" class="w-50" (click)="backToLogin()">Back to Login</button>
+              </div>
             </form>
           </c-card-body>
         </c-card>

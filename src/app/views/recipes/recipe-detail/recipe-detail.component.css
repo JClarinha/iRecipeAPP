@@ -17,3 +17,18 @@
   padding: 1rem;
   border-radius: 0.5rem 0.5rem 0 0;
 }
+
+.approved {
+  color: green !important;
+  font-weight: bold;
+}
+
+.pending {
+  color: orange !important;
+  font-weight: bold;
+}
+
+.rejected {
+  color: red !important;
+  font-weight: bold;
+}

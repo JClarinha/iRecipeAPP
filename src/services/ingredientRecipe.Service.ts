@@ -19,8 +19,12 @@ export class IngredientRecipeService {
         return this.httpClient.get<IngredientRecipe[]>(this.apiUrl + 'iRecipeAPI/IngredientRecipe')
     }
 
-    getByRecipeId(recipeid: number): Observable<IngredientRecipe> {
-        return this.httpClient.get<IngredientRecipe>(this.apiUrl + 'iRecipeAPI/IngredientRecipe/' + recipeid)
+    getById(id: number): Observable<IngredientRecipe> {
+        return this.httpClient.get<IngredientRecipe>(this.apiUrl + 'iRecipeAPI/IngredientRecipe/' + id)
+    }
+
+    getByRecipeId(recipeId: number): Observable<IngredientRecipe[]> {
+        return this.httpClient.get<IngredientRecipe[]>(this.apiUrl + 'iRecipeAPI/IngredientRecipe/Recipe/' + recipeId)
     }
 
     save(formData: FormData): Observable<any> {

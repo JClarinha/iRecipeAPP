@@ -141,7 +141,7 @@ export class NewRecipeComponent implements OnInit {
       formData.append('difficultyId', this.recipeForm.get('difficultyId')?.value);
 
       // Adicionar valores manualmente
-      formData.append('approval', 'false'); // Adiciona 'true' como string
+      formData.append('approval', ''); // Adiciona 'true' como string
       formData.append('userId', '1'); // Adiciona o userId manualmente
       formData.append('recipeDate', new Date().toISOString()); // Adiciona a data atual em formato ISO
 
@@ -180,7 +180,7 @@ export class NewRecipeComponent implements OnInit {
             });
 
             // Após associar todos os ingredientes, navega para o dashboard
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/recipe/viewall']);
         },
         error: (error) => {
             console.error('Erro ao gravar receita:', error);

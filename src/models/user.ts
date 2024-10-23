@@ -3,6 +3,5 @@ export interface User {
     name: string;
     email: string;
     password: string;
-    blocked: boolean;
     admin: boolean;
 }

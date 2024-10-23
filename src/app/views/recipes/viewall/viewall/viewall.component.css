@@ -90,17 +90,17 @@
   max-height: 200px; /* Ajuste essa altura conforme necessário */
 }
 
-.status-approved {
+.approved {
   color: green !important;
   font-weight: bold;
 }
 
-.status-pending {
+.pending {
   color: orange !important;
   font-weight: bold;
 }
 
-.status-rejected {
+.rejected {
   color: red !important;
   font-weight: bold;
 }
