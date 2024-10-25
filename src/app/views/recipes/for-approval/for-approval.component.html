@@ -1,0 +1,40 @@
+<div class="recipe-list">
+  <h2 style="text-align: center; width: 100%;  margin-bottom: 2%;"> Recipes for Approval</h2>
+  <br><br>
+
+  @for (recipeItem of recipes; let i = $index; track recipeItem) {
+    <div class="card" (click)=" goToApprovalDetails(recipeItem)" style="cursor: pointer;">
+      <img 
+      class="card-img-top" 
+      [src]="recipeItem.imagePath ? recipeItem.imagePath : '/assets/images/Image_not_available.png'" 
+      alt="{{ recipeItem.name }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ recipeItem.name }}</h5>
+        <p class="card-category">{{ recipeItem.category?.name || 'No Category' }}</p>
+        <p class="card-description">{{ recipeItem.description }}</p>
+        <ul class="card-details">
+          <li>Difficulty: {{ recipeItem.difficulty?.difficultyLevel || 'Unknown' }}</li>
+          <li>Duration: {{ recipeItem.duration }} minutes</li>
+          <li>Pax: {{ recipeItem.pax }}</li>
+          <li>Date: {{ recipeItem.recipeDate | date }}</li>
+          <li>User: {{ recipeItem.user?.name }}</li>
+          <li>Status: 
+            <span [ngClass]="{
+              'approved': recipeItem.approval === true,
+              'rejected': recipeItem.approval === false,
+              'pending': recipeItem.approval === null
+            }">
+              {{
+                recipeItem.approval === true ? 'Approved' :
+                recipeItem.approval === false ? 'Rejected' :
+                'Pending'
+              }}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  }
+</div>
+
+

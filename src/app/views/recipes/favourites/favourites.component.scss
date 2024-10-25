@@ -1,0 +1,74 @@
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.recipe-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  width: calc(33.333% - 20px);
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease-in-out;
+  position: relative;
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.card-category, .card-description {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.card-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card-details li {
+  font-size: 0.875rem;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 180px; 
+  right: 5px; 
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2; 
+}
+
+.favorite-icon {
+  color: #f39c12;
+  font-size: 24px;
+}

@@ -1,0 +1,39 @@
+.loading-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Garante que o carregador apareça acima de outros conteúdos */
+}
+
+.hidden {
+  display: none; /* Esconde o ícone se não for visível */
+}
+
+.position-relative {
+  display: flex;
+  align-items: center;
+}
+
+.icon-eye {
+  width: 20px; /* Ajuste o tamanho conforme necessário */
+  height: 20px;
+  color: #6c757d; /* Cor do ícone */
+}
+
+.invalid-feedback {
+  margin-top: 0; /* Remove a margem superior */
+  margin-bottom: 0; /* Remove a margem inferior */
+  font-size: 0.875rem; /* Tamanho da fonte da mensagem de erro */
+  color: #dc3545; /* Cor do texto de erro */
+}
+
+
+
+.c-input-group {
+  margin-bottom: 0 !important; /* Remover margens desnecessárias entre os grupos de entrada */
+}
+
+
+
+

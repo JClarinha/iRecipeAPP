@@ -1,0 +1,33 @@
+<div class="recipe-list">
+  <h2 style="text-align: center; width: 100%; margin-bottom: 2%;">My Favourite Recipes</h2>
+  <br><br>
+
+  @for (favItem of favourites; let i = $index; track favItem) {
+    <div class="card" style="position: relative; cursor: pointer;" (click)="goToRecipeDetails(favItem)">
+      
+    
+      <button class="favorite-button" (click)="toggleFavourite(favItem); $event.stopPropagation()" title="Remove Favourite">
+        <fa-icon [icon]="faStarSolid" class="favorite-icon"></fa-icon>
+      </button>
+      
+      <img 
+        class="card-img-top" 
+        [src]="favItem.recipe?.imagePath ? favItem.recipe?.imagePath : '/assets/images/Image_not_available.png'" 
+        alt="{{ favItem.recipe?.name }}">
+        
+      <div class="card-body">
+        <h5 class="card-title">{{ favItem.recipe?.name }}</h5>
+        <p class="card-category">{{ favItem.recipe?.category?.name || 'No Category' }}</p>
+        <p class="card-description">{{ favItem.recipe?.description }}</p>
+        
+        <ul class="card-details">
+          <li>Difficulty: {{ favItem.recipe?.difficulty?.difficultyLevel || 'Unknown' }}</li>
+          <li>Duration: {{ favItem.recipe?.duration }} minutes</li>
+          <li>Pax: {{ favItem.recipe?.pax }}</li>
+          <li>Date: {{ favItem.recipe?.recipeDate | date }}</li>
+          <li>Created by: {{ favItem.recipe?.user?.name }}</li>
+        </ul>
+      </div>
+    </div>
+  }
+</div>

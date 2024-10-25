@@ -1,0 +1,83 @@
+<div class="container mt-5">
+  <!-- Secção para mostrar as receitas criadas pelo utilizador -->
+  <div class="recipe-list">
+    <h2 style="text-align: center;">Dashboard:</h2>
+    <br>
+    <div class="card" *ngFor="let recipeItem of recipes" style="position: relative;">
+      <img class="card-img-top"
+        [src]="recipeItem.imagePath ? recipeItem.imagePath : '/assets/images/Image_not_available.png'"
+        alt="{{ recipeItem.name }}">
+
+      <div class="card-body">
+        <h5 class="card-title">{{ recipeItem.name }}</h5>
+
+        <!-- Texto de Favorito com Ícone -->
+        <button class="favorite-button" (click)="toggleFavourite(recipeItem)" title="Remove Favourite"
+          style="position: absolute; top: 15px; right: 20px; display: flex; align-items: center; color: #f39c12; background: none; border: none;">
+          <span style="margin-right: 8px;"><label style="font-weight: bold; font-size: larger;">Favourite</label></span>
+          <fa-icon [icon]="isRecipeFavourite(recipeItem.id) ? faStarSolid : faStarOutline"
+            class="favorite-icon"></fa-icon>
+        </button>
+
+        <p class="card-category"> {{ recipeItem.category?.name || 'Sem Categoria' }}</p>
+        <p class="card-description">{{ recipeItem.description }}</p>
+
+        <ul class="card-details">
+          <li><label style="font-weight: bold;">Difficulty Level:</label> {{ recipeItem.difficulty?.difficultyLevel ||
+            'Desconhecido' }}</li>
+          <li><label style="font-weight: bold;">Preparation Time:</label> {{ recipeItem.duration }} minutes</li>
+          <li><label style="font-weight: bold;">Number of Pax:</label> {{ recipeItem.pax }}</li>
+
+          <!-- Ingredients Section -->
+          <li><label style="font-weight: bold;">Ingredients:</label></li>
+          <ul>
+            <li *ngFor="let ingredientItem of recipeItem.ingredients">
+              {{ ingredientItem.ingredient?.name }}: {{ ingredientItem.quantity }} {{ ingredientItem.unit?.name }}
+            </li>
+          </ul>
+
+          <!-- Preparation Method Section -->
+          <li><label style="font-weight: bold;">Preparation:</label></li>
+          <ol>
+            <li *ngFor="let step of formatPreparationMethod(recipeItem.preparation)">
+              {{ step }}
+            </li>
+          </ol>
+        </ul>
+
+        <br>
+        <p class="card-user"><label style="font-weight: bold;">Date of Creation:</label> {{ recipeItem.recipeDate | date
+          }}</p>
+        <p class="card-user"><label style="font-weight: bold;">Created by:</label> {{ recipeItem.user?.name }}</p>
+      </div>
+
+      <div class="recipe-comments">
+        <h5>Comments:</h5>
+        <ul class="comments-list">
+          <li *ngFor="let comment of commentsByRecipe[recipeItem.id]" class="comment-item">
+            <strong class="comment-user">{{ comment.user?.name }}:</strong>
+            <span class="comment-text">{{ comment.description }}</span>
+
+            
+
+            
+            <fa-icon *ngIf="comment.userId === userId || isAdmin" [icon]="faTrashCan" class="delete-comment-btn"
+              (click)="deleteComment(comment.id, recipeItem.id)" title="Delete comment"
+              style="cursor: pointer; color: red;"></fa-icon>
+          </li>
+        </ul>
+
+        
+        <div class="add-comment">
+          <input [(ngModel)]="newComment[recipeItem.id]" class="comment-input" placeholder="Add a comment..." />
+          <button class="btn btn-primary" (click)="addComment(recipeItem.id)">Add Comment</button>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+  <br><br>
+</div>
+<br><br>

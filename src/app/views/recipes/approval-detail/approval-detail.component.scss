@@ -1,0 +1,94 @@
+.card {
+    background-color: #ffffff;
+    border: none;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    max-width: 900px; /* Aumenta a largura do card */
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+  
+  .card-header {
+    color: #333;
+    font-weight: 300;
+    font-size: 1.75rem;
+    border-bottom: 2px solid #ddd;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+  
+  .approved {
+    color: green !important;
+    font-weight: bold;
+  }
+  
+  .pending {
+    color: orange !important;
+    font-weight: bold;
+  }
+  
+  .rejected {
+    color: red !important;
+    font-weight: bold;
+  }
+
+  .admin-actions {
+    display: flex;
+    justify-content: space-between; /* Distribui os botões nos cantos e no centro */
+    align-items: center; /* Alinha os botões verticalmente */
+    margin-top: 20px;
+    position: relative; /* Para permitir o posicionamento absoluto dos botões de canto */
+  }
+  
+  .btn-back {
+    position: absolute;
+    left: 0; /* Fixa no canto inferior esquerdo */
+    
+  }
+  
+  .center-buttons {
+    display: flex;
+    gap: 20px; /* Espaçamento uniforme entre os botões centrais */
+    justify-content: center;
+    width: 100%; /* Garante que os botões centrais fiquem no centro */
+  }
+  
+  .btn-remove {
+    position: absolute;
+    right: 0; /* Fixa no canto inferior direito */
+  }
+  
+  .admin-actions button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-actions .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .admin-actions .btn-success {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .admin-actions .btn-danger {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .admin-actions .btn-warning {
+    background-color: #ffc107;
+    color: white;
+  }
+  
+  .admin-actions button:hover {
+    opacity: 0.8;
+  }
+  
+
+  

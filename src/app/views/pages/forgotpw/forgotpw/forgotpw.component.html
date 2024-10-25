@@ -1,0 +1,24 @@
+<div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col lg="7" md="9" xl="6">
+        <c-card class="mx-4">
+          <c-card-body class="p-5 py-5">
+            <form (ngSubmit)="onSubmit()">
+              <h1 class="mb-4">Forgot Password</h1>
+              <p class="text-body-secondary mb-4">Enter your email to reset your password</p>
+              <c-input-group class="mb-4">
+                <span cInputGroupText>&#64;</span>
+                <input type="email" placeholder="Email" name="email" class="form-control" required [(ngModel)]="email" email cFormControl />
+              </c-input-group>
+              <div class="d-grid gap-2 d-md-flex justify-content-center">
+                <button cButton color="success" class="w-50" type="submit">Send Link</button>
+                <button cButton color="primary" class="w-50" type="button" routerLink="/login">Back to Login</button>
+              </div>
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>
